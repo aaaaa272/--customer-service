@@ -58,9 +58,58 @@ DEEPSEEK_API_KEY=your-api-key
 DEEPSEEK_BASE_URL=https://api.deepseek.com/v1
 DEEPSEEK_MODEL=deepseek-chat
 ```
-### 3. 安装Mysql数据库并在 `.env` 文件中配置数据库连接信息
+### 3. 安装Mysql数据库
 
-### 4. 启动服务
+```bash
+sudo apt update
+sudo apt install mysql-server
+#修改加密方式和密码
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'g1601522830';
+FLUSH PRIVILEGES;
+exit;
+#数据库初始化
+export PYTHONPATH=.
+python scripts/init_db.py
+```
+
+### 5. 安装neo4j图数据库
+
+```bash
+sudo apt update
+sudo apt install openjdk-17-jre -y #先安装 Java 17
+# 下载并添加官方的 GPG 密钥
+curl -fsSL https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/neo4j.gpg
+# 将 Neo4j 仓库添加到系统的源列表中
+echo 'deb [signed-by=/usr/share/keyrings/neo4j.gpg] https://debian.neo4j.com stable latest' | sudo tee /etc/apt/sources.list.d/neo4j.list
+# 更新源并安装 Neo4j
+sudo apt update
+sudo apt install neo4j -y
+#启动它并设置开机自动运行
+sudo systemctl enable neo4j
+sudo systemctl start neo4j
+#第一次进入修改密码
+cypher-shell -u neo4j -p neo4j
+#退出
+:exit
+```
+
+### 6. 安装Redis
+
+```bash
+sudo apt update
+sudo apt install redis-server -y
+```
+
+### 7. 安装Ollama
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+# 下载并运行 bge-m3 词向量模型
+ollama run bge-m3
+```
+
+### 8. 启动服务
 
 ```bash
 # 进入后端目录
@@ -84,6 +133,10 @@ uvicorn.run(
 - API 文档：http://localhost:8000/docs
 - 前端界面：http://localhost:8000
 
+## 呈现效果
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img.png](img.png)
 ## 技术栈
 
 - 后端：
