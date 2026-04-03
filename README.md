@@ -73,7 +73,7 @@ export PYTHONPATH=.
 python scripts/init_db.py
 ```
 
-### 5. 安装neo4j图数据库
+### 4. 安装neo4j图数据库
 
 ```bash
 sudo apt update
@@ -94,14 +94,14 @@ cypher-shell -u neo4j -p neo4j
 :exit
 ```
 
-### 6. 安装Redis
+### 5. 安装Redis
 
 ```bash
 sudo apt update
 sudo apt install redis-server -y
 ```
 
-### 7. 安装Ollama
+### 6. 安装Ollama
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
@@ -109,7 +109,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama run bge-m3
 ```
 
-### 8. 启动服务
+### 7. 启动服务
 
 ```bash
 # 进入后端目录
